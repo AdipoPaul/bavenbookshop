@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Baven | <%= title %></title> 
+  <link rel="stylesheet" href="/login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="edit-box">
+    <h1>Checkout</h1>
+    <form action="/checkout/complete" method="POST">
+      <h2>Shipping Information</h2>
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" value="<%= user.firstName %>" required>
+      
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" value="<%= user.lastName %>" required>
+      
+      <label for="address">Address:</label>
+      <input type="text" id="address" name="address" value="<%= user.address %>" required>
+      
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" value="<%= user.city %>" required>
+      
+      <label for="postalCode">Postal Code:</label>
+      <input type="text" id="postalCode" name="postalCode" value="<%= user.postalCode %>" required>
+      
+      <label for="country">Country:</label>
+      <input type="text" id="country" name="country" value="<%= user.country %>" required>
+      
+      <h2>Billing Information</h2>
+      <label for="cardNumber">Phone Number:</label>
+      <input type="text" id="cardNumber" name="cardNumber" required>
+      
+      <h2>Order Summary</h2>
+      <table class="order-summary">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit Price (KSH)</th>
+            <th>Total (KSH)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% cartItems.forEach(item => { %>
+            <tr>
+              <td><%= item.productName %></td>
+              <td><%= item.quantity %></td>
+              <td><%= item.unitPrice %></td>
+              <td><%= item.quantity * item.unitPrice %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      
+      <div class="form-group">
+        <input type="submit" value="Complete Checkout">
+      </div>
+    </form>
+  </div>
+</body>
+</html>
